@@ -492,5 +492,24 @@ class LshwParserSpec extends mutable.Specification {
       }
     } // wonky opterons
 
+    "Parse GPU server" in {
+      "quad nvidia GPU server" in new LshwParserHelper("lshw-gpu.xml"){
+        val parseResults = parsed()
+        parseResults must beRight
+        parseResults.right.toOption must beSome.which { rep =>
+          rep.cpuCount mustEqual 2
+          rep.cpuCoreCount mustEqual 20
+          rep.cpuSpeed must beCloseTo(2.1, 0.1)
+
+          rep.totalMemory.inGigabytes must beCloseTo(512L, 1)
+          rep.memoryBanksUsed mustEqual 16
+
+          rep.nicCount mustEqual 3
+
+          rep.gpuCount mustEqual 4
+        }
+      }
+    }
+       
   } // The LSHW parser should
 }

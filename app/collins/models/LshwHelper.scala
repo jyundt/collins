@@ -92,7 +92,6 @@ object LshwHelper extends CommonHelper[LshwRepresentation] {
     )
   }
 
-
   protected def reconstructGpu(meta: Map[Int, Seq[MetaWrapper]]): FilteredSeq[Gpu] = {
     val gpuSeq = meta.foldLeft(Seq[Gpu]()) { case (seq, map) =>
       val groupId = map._1
@@ -107,7 +106,9 @@ object LshwHelper extends CommonHelper[LshwRepresentation] {
     val filteredMeta = meta.map { case(groupId, metaSeq) =>
       val newSeq = filterNot(
         metaSeq,
-        Set(GpuCount.id, GpuDescription.id)
+        //I don't think we need GpuCount?
+        //Set(GpuCount.id, GpuDescription.id)
+        Set(GpuDescription.id)
       )
       groupId -> newSeq
     }
@@ -127,18 +128,6 @@ object LshwHelper extends CommonHelper[LshwRepresentation] {
       (groupId + 1, total ++ res)
     }._2
   }
-
-/* stashing
-    println("gpuCount")
-    println(lshw.gpuCount)
-    val gpu = lshw.gpus.find(gpu => gpu.description.nonEmpty).getOrElse(lshw.gpus.head)
-    println("gpu")
-    println(gpu)
-    Seq(
-      AssetMetaValue(asset, GpuDescription.id, "%s %s".format(gpu.product, gpu.vendor))
-    )
-  }
-*/
 
   protected def reconstructMemory(meta: Map[Int, Seq[MetaWrapper]]): FilteredSeq[Memory] = {
     if (!meta.contains(0)) {
