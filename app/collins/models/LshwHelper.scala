@@ -49,8 +49,8 @@ object LshwHelper extends CommonHelper[LshwRepresentation] {
   def reconstruct(asset: Asset, assetMeta: Seq[MetaWrapper]): Reconstruction = {
     val metaMap = assetMeta.groupBy { _.getGroupId }
     val (cpus,postCpuMap) = reconstructCpu(metaMap)
-    val (gpus,postGpuMap) = reconstructGpu(metaMap)
-    val (memory,postMemoryMap) = reconstructMemory(postCpuMap)
+    val (gpus,postGpuMap) = reconstructGpu(postCpuMap)
+    val (memory,postMemoryMap) = reconstructMemory(postGpuMap)
     val (nics,postNicMap) = reconstructNics(postMemoryMap)
     val (disks,postDiskMap) = reconstructDisks(postNicMap)
     val (base,postBaseMap) = reconstructBase(postDiskMap)

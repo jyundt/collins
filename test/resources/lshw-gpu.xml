@@ -1750,7 +1750,7 @@
      <vendor>Intel Corporation</vendor>
      <physid>1b</physid>
      <businfo>pci@0000:7f:0f.0</businfo>
-     <eersion>02</version>
+     <version>02</version>
      <width units="bits">32</width>
      <clock units="Hz">33000000</clock>
      <configuration>
