@@ -106,8 +106,6 @@ object LshwHelper extends CommonHelper[LshwRepresentation] {
     val filteredMeta = meta.map { case(groupId, metaSeq) =>
       val newSeq = filterNot(
         metaSeq,
-        //I don't think we need GpuCount?
-        //Set(GpuCount.id, GpuDescription.id)
         Set(GpuDescription.id)
       )
       groupId -> newSeq
