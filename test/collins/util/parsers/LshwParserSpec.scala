@@ -498,15 +498,9 @@ class LshwParserSpec extends mutable.Specification {
         parseResults must beRight
         parseResults.right.toOption must beSome.which { rep =>
           rep.cpuCount mustEqual 2
-          rep.cpuCoreCount mustEqual 20
-          rep.cpuSpeed must beCloseTo(2.1, 0.1)
+          rep.cpuCoreCount mustEqual 12
 
-          rep.totalMemory.inGigabytes must beCloseTo(512L, 1)
-          rep.memoryBanksUsed mustEqual 16
-
-          rep.nicCount mustEqual 3
-
-          rep.gpuCount mustEqual 4
+          rep.gpuCount mustEqual 2
         }
       }
     }
