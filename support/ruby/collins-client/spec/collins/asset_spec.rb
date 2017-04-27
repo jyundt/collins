@@ -101,7 +101,6 @@ describe Collins::Asset do
 
     it "#gpu_count" do
       subject.gpu_count.should == 2
-
     end
   end
 
